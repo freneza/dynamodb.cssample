@@ -1,12 +1,12 @@
 ﻿using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
-using dynamodb.sample.Repo.Converter;
-using dynamodb.sample.Repo.Filter;
 using System.Collections.Generic;
-using dynamodb.sample.Repo.Key;
+using InvestmentControl.Repo.Converter;
+using InvestmentControl.Repo.Key;
+using InvestmentControl.Repo.Filter;
 
-namespace dynamodb.sample.Repo
+namespace InvestmentControl.Repo
 {
     public class GenericRepo<T>
     {
