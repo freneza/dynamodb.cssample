@@ -7,23 +7,25 @@ namespace dynamodb.sample.Business.Service
 {
     public class AcaoService
     {
+        public AcaoRepo repo { get; set; } = new AcaoRepo();
+
         public IEnumerable<Acao> Search(string setor)
         {
-            return new AcaoRepo().Search(new AcaoSearchFilter { Setor = setor });
+            return repo.Search(new AcaoSearchFilter { Setor = setor });
         }
 
         public Acao Get(string ticker)
         {
-            return new AcaoRepo().Get(new AcaoKey { Ticker = ticker });
+            return repo.Get(new AcaoKey { Ticker = ticker });
         }
 
         public IEnumerable<Acao> List()
         {
-            return new AcaoRepo().List();
+            return repo.List();
         }
         public void Add(Acao acao)
         {
-            new AcaoRepo().Add(acao);
+            repo.Add(acao);
         }
     }
 }

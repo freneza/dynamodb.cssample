@@ -6,10 +6,12 @@ namespace dynamodb.sample.Business.Service
 {
     public class EncerrarRecomendacaoService
     {
+        public RecomendacaoAbertaRepo repoA { get; set; } = new RecomendacaoAbertaRepo();
+        public RecomendacaoFechadaRepo repoF { get; set; } = new RecomendacaoFechadaRepo();
+
         public void Execute(string carteira, string ticker, int data_fechamento, double saida)
         {
-            var rarepo = new RecomendacaoAbertaRepo();
-            var recomendacao_aberta = rarepo.Get(new RecomendacaoAbertaKey { Carteira = carteira, Ticker = ticker });
+            var recomendacao_aberta = repoA.Get(new RecomendacaoAbertaKey { Carteira = carteira, Ticker = ticker });
 
             var recomendacao_fechada = new RecomendacaoFechada
             {
@@ -23,9 +25,8 @@ namespace dynamodb.sample.Business.Service
                 Resultado = Math.Round(((saida - recomendacao_aberta.Entrada) / recomendacao_aberta.Entrada) * 100, 2)
             };
 
-            var rfrepo = new RecomendacaoFechadaRepo();
-            rfrepo.Add(recomendacao_fechada);
-            rarepo.Delete(recomendacao_aberta.Key);
+            repoF.Add(recomendacao_fechada);
+            repoA.Delete(recomendacao_aberta.Key);
         }
     }
 }
