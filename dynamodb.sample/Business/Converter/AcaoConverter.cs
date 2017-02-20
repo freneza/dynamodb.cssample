@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace dynamodb.sample.Business.Converter
 {
-    public class AcaoConverter : IConverter<Acao>
+    public class AcaoConverter : DocumentConverter<Acao>, IConverter<Acao>
     {
         public static Acao ConvertToAcao(string s)
         {
@@ -26,7 +26,7 @@ namespace dynamodb.sample.Business.Converter
             if (!string.IsNullOrEmpty(acao.Setor)) doc.Add("setor", acao.Setor);
             return doc;
         }
-        public Acao ConvertToDomain(Dictionary<string, AttributeValue> item)
+        public override Acao ConvertToDomain(Dictionary<string, AttributeValue> item)
         {
             return new Acao()
             {
@@ -34,10 +34,6 @@ namespace dynamodb.sample.Business.Converter
                 Nome = item.ContainsKey("nome") ? item["nome"].S : string.Empty,
                 Setor = item.ContainsKey("setor") ? item["setor"].S : string.Empty
             };
-        }
-        public Acao ConvertToDomain(Document doc)
-        {
-            return ConvertToDomain(doc.ToAttributeMap());
         }
     }
 }

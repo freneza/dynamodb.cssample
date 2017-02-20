@@ -6,7 +6,7 @@ using Amazon.DynamoDBv2.Model;
 
 namespace dynamodb.sample.Business.Converter
 {
-    public class RecomendacaoFechadaConverter : IConverter<RecomendacaoFechada>
+    public class RecomendacaoFechadaConverter : DocumentConverter<RecomendacaoFechada>, IConverter<RecomendacaoFechada>
     {
         public Document ConvertToDocument(RecomendacaoFechada recomendacao)
         {
@@ -21,12 +21,7 @@ namespace dynamodb.sample.Business.Converter
             doc.Add("entrada", recomendacao.Entrada);
             return doc;
         }
-        public RecomendacaoFechada ConvertToDomain(Document doc)
-        {
-            return ConvertToDomain(doc.ToAttributeMap());
-
-        }
-        public RecomendacaoFechada ConvertToDomain(Dictionary<string, AttributeValue> item)
+        public override RecomendacaoFechada ConvertToDomain(Dictionary<string, AttributeValue> item)
         {
             return new RecomendacaoFechada()
             {

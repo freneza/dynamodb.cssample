@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\Converter\AcaoConverter.cs" />
+    <Compile Include="Business\Converter\DocumentConverter.cs" />
     <Compile Include="Business\Converter\IConverter.cs" />
     <Compile Include="Business\Converter\RecomendacaoAbertaConverter.cs" />
     <Compile Include="Business\Converter\RecomendacaoFechadaConverter.cs" />

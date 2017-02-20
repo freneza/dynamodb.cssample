@@ -7,7 +7,7 @@ using System.Globalization;
 
 namespace dynamodb.sample.Business.Converter
 {
-    public class RecomendacaoAbertaConverter : IConverter<RecomendacaoAberta>
+    public class RecomendacaoAbertaConverter : DocumentConverter<RecomendacaoAberta>, IConverter<RecomendacaoAberta>
     {
         public Document ConvertToDocument(RecomendacaoAberta recomendacao)
         {
@@ -23,11 +23,7 @@ namespace dynamodb.sample.Business.Converter
             if (recomendacao.Risco.HasValue) doc.Add("Risco", recomendacao.Risco);
             return doc;
         }
-        public RecomendacaoAberta ConvertToDomain(Document doc)
-        {
-            return ConvertToDomain(doc.ToAttributeMap());
-        }
-        public RecomendacaoAberta ConvertToDomain(Dictionary<string, AttributeValue> item)
+        public override RecomendacaoAberta ConvertToDomain(Dictionary<string, AttributeValue> item)
         {
             CultureInfo culture = new CultureInfo("en"); // cultura no DynamoDb...
 
