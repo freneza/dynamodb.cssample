@@ -7,17 +7,6 @@ namespace dynamodb.sample.Business.Converter
 {
     public class AcaoConverter : DocumentConverter<Acao>, IConverter<Acao>
     {
-        public static Acao ConvertToAcao(string s)
-        {
-            var dados = s.Split(' ');
-
-            var acao = new Acao();
-            acao.Ticker = dados[0];
-            if (dados.Length >= 2) acao.Nome = dados[1];
-            if (dados.Length >= 3) acao.Setor = dados[2];
-
-            return acao;
-        }
         public Document ConvertToDocument(Acao acao)
         {
             var doc = new Document();

@@ -1,6 +1,5 @@
 ﻿using System;
 using dynamodb.sample.Domain;
-using dynamodb.sample.Business.Converter;
 using dynamodb.sample.Business.Service;
 
 namespace dynamodb.sample
@@ -99,8 +98,23 @@ namespace dynamodb.sample
         {
             Console.WriteLine("Digite: ticker empresa setor");
             var entrada = Console.ReadLine();
-            var acao = AcaoConverter.ConvertToAcao(entrada);
+            var acao = ConsoleAcaoConverter.ConvertToAcao(entrada);
             new AcaoService().Add(acao);
+        }
+    }
+
+    class ConsoleAcaoConverter
+    {
+        public static Acao ConvertToAcao(string s)
+        {
+            var dados = s.Split(' ');
+
+            var acao = new Acao();
+            acao.Ticker = dados[0];
+            if (dados.Length >= 2) acao.Nome = dados[1];
+            if (dados.Length >= 3) acao.Setor = dados[2];
+
+            return acao;
         }
     }
 

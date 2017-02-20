@@ -7,7 +7,7 @@ namespace dynamodb.sample.Repo
     {
         public AcaoRepo() : base("acao")
         {
-            this.converter = new AcaoConverter();
+            this.converter = new ConsoleAcaoConverter();
         }
     }
 }
