@@ -12,16 +12,5 @@ namespace dynamodb.sample.Domain
         public Double Resultado { get; set; }
         public int DataEntrada { get; set; }
         public Double Entrada { get; set; }
-        public RecomendacaoFechadaKey Key
-        {
-            get
-            {
-                return new RecomendacaoFechadaKey
-                {
-                    Ticker = this.Ticker,
-                    DataFechamento = this.DataFechamento
-                };
-            }
-        }
     }
 }

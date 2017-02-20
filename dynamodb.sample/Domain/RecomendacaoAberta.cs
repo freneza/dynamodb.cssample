@@ -13,16 +13,5 @@ namespace dynamodb.sample.Domain
         public int Data { get; set; }
         public Double Entrada { get; set; }
         public Double? Risco { get; set; }
-        public RecomendacaoAbertaKey Key
-        {
-            get
-            {
-                return new RecomendacaoAbertaKey
-                {
-                    Carteira = this.Carteira,
-                    Ticker =this.Ticker
-                };
-            }
-        }
     }
 }

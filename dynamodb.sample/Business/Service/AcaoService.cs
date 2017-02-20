@@ -16,7 +16,7 @@ namespace dynamodb.sample.Business.Service
 
         public Acao Get(string ticker)
         {
-            return repo.Get(new AcaoKey { Ticker = ticker });
+            return repo.Get(new Acao { Ticker = ticker }); // nao ficou legal. tem que saber que a chave é o ticker.
         }
 
         public IEnumerable<Acao> List()

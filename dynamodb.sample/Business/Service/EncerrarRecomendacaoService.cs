@@ -11,7 +11,7 @@ namespace dynamodb.sample.Business.Service
 
         public void Execute(string carteira, string ticker, int data_fechamento, double saida)
         {
-            var recomendacao_aberta = repoA.Get(new RecomendacaoAbertaKey { Carteira = carteira, Ticker = ticker });
+            var recomendacao_aberta = repoA.Get(new RecomendacaoAberta { Carteira = carteira, Ticker = ticker }); // precisa saber qual a chave...
 
             var recomendacao_fechada = new RecomendacaoFechada
             {
@@ -26,7 +26,7 @@ namespace dynamodb.sample.Business.Service
             };
 
             repoF.Add(recomendacao_fechada);
-            repoA.Delete(recomendacao_aberta.Key);
+            repoA.Delete(recomendacao_aberta);
         }
     }
 }

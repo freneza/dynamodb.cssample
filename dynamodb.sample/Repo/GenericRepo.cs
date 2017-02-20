@@ -5,6 +5,7 @@ using dynamodb.sample.Repo.Converter;
 using dynamodb.sample.Repo.Filter;
 using dynamodb.sample.Domain;
 using System.Collections.Generic;
+using dynamodb.sample.Repo.Key;
 
 namespace dynamodb.sample.Repo
 {
@@ -15,6 +16,7 @@ namespace dynamodb.sample.Repo
         private Table table { get; set; }
         public string table_name { get; set; }
         public IConverter<T> converter { get; set; }
+        public IKeyExtractor<T> key { get; set; }
         #endregion
 
         #region Constructors
@@ -41,13 +43,13 @@ namespace dynamodb.sample.Repo
             var response = client.Scan(request);
             return ReadScanResponse(response);
         }
-        public T Get(IKey chave)
+        public T Get(T obj)
         {
-            return converter.ConvertToDomain(table.GetItem(chave.ToDictionary()));
+            return converter.ConvertToDomain(table.GetItem(key.ToDictionary(obj)));
         }
-        public void Delete(IKey chave)
+        public void Delete(T obj)
         {
-            table.DeleteItem(chave.ToDictionary());
+            table.DeleteItem(key.ToDictionary(obj));
         }
         public IEnumerable<T> Search(ISearchFilter filters)
         {

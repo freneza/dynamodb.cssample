@@ -119,15 +119,15 @@
     <Compile Include="Business\Service\AcaoService.cs" />
     <Compile Include="Business\Service\EncerrarRecomendacaoService.cs" />
     <Compile Include="Domain\Acao.cs" />
-    <Compile Include="Domain\AcaoKey.cs" />
-    <Compile Include="Domain\IKey.cs" />
+    <Compile Include="Repo\Key\AcaoKeyExtractor.cs" />
+    <Compile Include="Repo\Key\IKeyExtractor.cs" />
     <Compile Include="Domain\RecomendacaoAberta.cs" />
     <Compile Include="Domain\RecomendacaoFechada.cs" />
-    <Compile Include="Domain\RecomendacaoFechadaKey.cs" />
+    <Compile Include="Repo\Key\RecomendacaoFechadaKeyExtractor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repo\AcaoRepo.cs" />
-    <Compile Include="Domain\RecomendacaoAbertaKey.cs" />
+    <Compile Include="Repo\Key\RecomendacaoAbertaKeyExtractor.cs" />
     <Compile Include="Repo\GenericRepo.cs" />
     <Compile Include="Repo\RecomendacaoAbertaRepo.cs" />
     <Compile Include="Repo\RecomendacaoFechadaRepo.cs" />
@@ -168,4 +168,5 @@
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.DynamoDBv2.3.3.2.1\analyzers\dotnet\cs\AWSSDK.DynamoDBv2.CodeAnalysis.dll" />
   </ItemGroup>
+  <ItemGroup />
 </Project>
