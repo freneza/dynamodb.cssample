@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
 
-namespace dynamodb.sample.Business.Converter
+namespace dynamodb.sample.Repo.Converter
 {
     public class RecomendacaoFechadaConverter : DocumentConverter<RecomendacaoFechada>, IConverter<RecomendacaoFechada>
     {

@@ -1,6 +1,6 @@
 ﻿using Amazon.DynamoDBv2.Model;
 
-namespace dynamodb.sample.Business.Filter
+namespace dynamodb.sample.Repo.Filter
 {
     public interface ISearchFilter
     {

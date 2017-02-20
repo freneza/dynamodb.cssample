@@ -3,7 +3,7 @@ using Amazon.DynamoDBv2.Model;
 using dynamodb.sample.Domain;
 using System.Collections.Generic;
 
-namespace dynamodb.sample.Business.Converter
+namespace dynamodb.sample.Repo.Converter
 {
     public class AcaoConverter : DocumentConverter<Acao>, IConverter<Acao>
     {

@@ -109,13 +109,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\Converter\AcaoConverter.cs" />
-    <Compile Include="Business\Converter\DocumentConverter.cs" />
-    <Compile Include="Business\Converter\IConverter.cs" />
-    <Compile Include="Business\Converter\RecomendacaoAbertaConverter.cs" />
-    <Compile Include="Business\Converter\RecomendacaoFechadaConverter.cs" />
-    <Compile Include="Business\Filter\AcaoSearchFilter.cs" />
-    <Compile Include="Business\Filter\ISearchFilter.cs" />
+    <Compile Include="Repo\Converter\AcaoConverter.cs" />
+    <Compile Include="Repo\Converter\DocumentConverter.cs" />
+    <Compile Include="Repo\Converter\IConverter.cs" />
+    <Compile Include="Repo\Converter\RecomendacaoAbertaConverter.cs" />
+    <Compile Include="Repo\Converter\RecomendacaoFechadaConverter.cs" />
+    <Compile Include="Repo\Filter\AcaoSearchFilter.cs" />
+    <Compile Include="Repo\Filter\ISearchFilter.cs" />
     <Compile Include="Business\Service\AcaoService.cs" />
     <Compile Include="Business\Service\EncerrarRecomendacaoService.cs" />
     <Compile Include="Domain\Acao.cs" />

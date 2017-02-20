@@ -5,7 +5,7 @@ using Amazon.DynamoDBv2.Model;
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace dynamodb.sample.Business.Converter
+namespace dynamodb.sample.Repo.Converter
 {
     public class RecomendacaoAbertaConverter : DocumentConverter<RecomendacaoAberta>, IConverter<RecomendacaoAberta>
     {

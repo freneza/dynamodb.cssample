@@ -1,4 +1,4 @@
-﻿using dynamodb.sample.Business.Converter;
+﻿using dynamodb.sample.Repo.Converter;
 using dynamodb.sample.Domain;
 
 namespace dynamodb.sample.Repo
@@ -7,7 +7,7 @@ namespace dynamodb.sample.Repo
     {
         public AcaoRepo() : base("acao")
         {
-            this.converter = new ConsoleAcaoConverter();
+            this.converter = new AcaoConverter();
         }
     }
 }

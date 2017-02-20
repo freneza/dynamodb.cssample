@@ -2,7 +2,7 @@
 using Amazon.DynamoDBv2.Model;
 using System.Collections.Generic;
 
-namespace dynamodb.sample.Business.Converter
+namespace dynamodb.sample.Repo.Converter
 {
     public abstract class DocumentConverter<T>
     {

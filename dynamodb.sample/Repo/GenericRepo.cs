@@ -1,8 +1,8 @@
 ﻿using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
-using dynamodb.sample.Business.Converter;
-using dynamodb.sample.Business.Filter;
+using dynamodb.sample.Repo.Converter;
+using dynamodb.sample.Repo.Filter;
 using dynamodb.sample.Domain;
 using System.Collections.Generic;
 

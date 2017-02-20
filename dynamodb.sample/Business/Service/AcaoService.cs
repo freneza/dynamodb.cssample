@@ -1,4 +1,4 @@
-﻿using dynamodb.sample.Business.Filter;
+﻿using dynamodb.sample.Repo.Filter;
 using dynamodb.sample.Domain;
 using dynamodb.sample.Repo;
 using System.Collections.Generic;

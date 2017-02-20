@@ -1,4 +1,4 @@
-﻿using dynamodb.sample.Business.Converter;
+﻿using dynamodb.sample.Repo.Converter;
 using dynamodb.sample.Domain;
 
 namespace dynamodb.sample.Repo
