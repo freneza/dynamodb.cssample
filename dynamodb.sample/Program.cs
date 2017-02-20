@@ -5,6 +5,7 @@ using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using dynamodb.sample.Repo;
 using dynamodb.sample.Business.Converter;
+using dynamodb.sample.Business.Filter;
 
 // Add using statements to access AWS SDK for .NET services. 
 // Both the Service and its Model namespace need to be added 
@@ -99,7 +100,7 @@ namespace dynamodb.sample
         {
             Console.WriteLine("Digite o setor:");
             var entrada = Console.ReadLine();
-            var lista = new AcaoRepo().Search(new AcaoSearchFilters { Setor = entrada });
+            var lista = new AcaoRepo().Search(new AcaoSearchFilter { Setor = entrada });
             foreach (var acao in lista)
             {
                 Print(acao);
@@ -109,7 +110,7 @@ namespace dynamodb.sample
         {
             Console.WriteLine("Digite o ticker:");
             var ticker = Console.ReadLine();
-            var acao = new AcaoRepo().Get(ticker);
+            var acao = new AcaoRepo().Get(new AcaoKey { Ticker = ticker });
             Print(acao);
         }
         private static void ListarAcoes()
@@ -140,12 +141,6 @@ namespace dynamodb.sample
             var acao = AcaoConverter.ConvertToAcao(entrada);
             new AcaoRepo().Add(acao);
         }
-    }
-
-
-    public class AcaoSearchFilters
-    {
-        public string Setor { get; set; }
     }
 
 }

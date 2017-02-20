@@ -4,7 +4,7 @@ using System;
 
 namespace dynamodb.sample.Domain
 {
-    public class RecomendacaoFechadaKey
+    public class RecomendacaoFechadaKey : IKey
     {
         public Double DataFechamento { get; set; }
         public string Ticker { get; set; }

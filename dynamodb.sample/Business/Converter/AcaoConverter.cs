@@ -5,16 +5,8 @@ using System.Collections.Generic;
 
 namespace dynamodb.sample.Business.Converter
 {
-    public class AcaoConverter
+    public class AcaoConverter : IConverter<Acao>
     {
-        public static Document ConvertToDocument(Acao acao)
-        {
-            var doc = new Document();
-            doc.Add("ticker", acao.Ticker);
-            if (!string.IsNullOrEmpty(acao.Nome)) doc.Add("nome", acao.Nome);
-            if (!string.IsNullOrEmpty(acao.Setor)) doc.Add("setor", acao.Setor);
-            return doc;
-        }
         public static Acao ConvertToAcao(string s)
         {
             var dados = s.Split(' ');
@@ -26,7 +18,15 @@ namespace dynamodb.sample.Business.Converter
 
             return acao;
         }
-        public static Acao ConvertToAcao(Dictionary<string, AttributeValue> item)
+        public Document ConvertToDocument(Acao acao)
+        {
+            var doc = new Document();
+            doc.Add("ticker", acao.Ticker);
+            if (!string.IsNullOrEmpty(acao.Nome)) doc.Add("nome", acao.Nome);
+            if (!string.IsNullOrEmpty(acao.Setor)) doc.Add("setor", acao.Setor);
+            return doc;
+        }
+        public Acao ConvertToDomain(Dictionary<string, AttributeValue> item)
         {
             return new Acao()
             {
@@ -35,9 +35,9 @@ namespace dynamodb.sample.Business.Converter
                 Setor = item.ContainsKey("setor") ? item["setor"].S : string.Empty
             };
         }
-        public static Acao ConvertToAcao(Document document)
+        public Acao ConvertToDomain(Document doc)
         {
-            return ConvertToAcao(document.ToAttributeMap());
+            return ConvertToDomain(doc.ToAttributeMap());
         }
     }
 }

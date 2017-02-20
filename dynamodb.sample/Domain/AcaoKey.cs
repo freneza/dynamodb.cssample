@@ -3,15 +3,13 @@ using System.Collections.Generic;
 
 namespace dynamodb.sample.Domain
 {
-    public class RecomendacaoAbertaKey : IKey
+    public class AcaoKey : IKey
     {
-        public string Carteira { get; set; }
         public string Ticker { get; set; }
         public Dictionary<string, DynamoDBEntry> ToDictionary()
         {
             var dic = new Dictionary<string, DynamoDBEntry>();
-            dic.Add("carteira", this.Carteira);
-            dic.Add("ticker",this.Ticker);
+            dic.Add("ticker", this.Ticker);
             return dic;
         }
     }

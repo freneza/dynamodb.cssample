@@ -2,28 +2,31 @@
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
 using dynamodb.sample.Business.Converter;
-using System;
+using dynamodb.sample.Business.Filter;
+using dynamodb.sample.Domain;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace dynamodb.sample.Repo
 {
     public class GenericRepo<T>
     {
+        #region Properties
         public AmazonDynamoDBClient client { get; set; }
         private Table table { get; set; }
         public string table_name { get; set; }
         public IConverter<T> converter { get; set; }
+        #endregion
 
-
+        #region Constructors
         public GenericRepo(string table_name)
         {
             client = new AmazonDynamoDBClient();
             this.table_name = table_name;
             table = Table.LoadTable(client, this.table_name);
         }
+        #endregion
+
+        #region Methods
         public void Add(T obj)
         {
             table.PutItem(converter.ConvertToDocument(obj));
@@ -38,23 +41,13 @@ namespace dynamodb.sample.Repo
             var response = client.Scan(request);
             return ReadScanResponse(response);
         }
-        public T Get(RecomendacaoFechadaKey chave)
+        public T Get(IKey chave)
         {
             return converter.ConvertToDomain(table.GetItem(chave.ToDictionary()));
         }
-        public IEnumerable<T> Search(AcaoSearchFilters filters)
+        public IEnumerable<T> Search(ISearchFilter filters)
         {
-            var request = new ScanRequest
-            {
-                TableName = table_name,
-                ExpressionAttributeValues = new Dictionary<string, AttributeValue>
-                {
-                    { ":val", new AttributeValue { S = filters.Setor } }
-                },
-                FilterExpression = "setor = :val"
-            };
-
-            var response = client.Scan(request);
+            var response = client.Scan(filters.GetScanRequest());
 
             return ReadScanResponse(response);
         }
@@ -69,5 +62,6 @@ namespace dynamodb.sample.Repo
 
             return lista;
         }
+        #endregion
     }
 }

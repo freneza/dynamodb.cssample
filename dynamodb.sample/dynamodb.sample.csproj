@@ -113,7 +113,11 @@
     <Compile Include="Business\Converter\IConverter.cs" />
     <Compile Include="Business\Converter\RecomendacaoAbertaConverter.cs" />
     <Compile Include="Business\Converter\RecomendacaoFechadaConverter.cs" />
+    <Compile Include="Business\Filter\AcaoSearchFilter.cs" />
+    <Compile Include="Business\Filter\ISearchFilter.cs" />
     <Compile Include="Domain\Acao.cs" />
+    <Compile Include="Domain\AcaoKey.cs" />
+    <Compile Include="Domain\IKey.cs" />
     <Compile Include="Domain\RecomendacaoAberta.cs" />
     <Compile Include="Domain\RecomendacaoFechada.cs" />
     <Compile Include="Domain\RecomendacaoFechadaKey.cs" />
