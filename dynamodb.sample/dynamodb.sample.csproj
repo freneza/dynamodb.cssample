@@ -115,6 +115,8 @@
     <Compile Include="Business\Converter\RecomendacaoFechadaConverter.cs" />
     <Compile Include="Business\Filter\AcaoSearchFilter.cs" />
     <Compile Include="Business\Filter\ISearchFilter.cs" />
+    <Compile Include="Business\Service\AcaoService.cs" />
+    <Compile Include="Business\Service\EncerrarRecomendacaoService.cs" />
     <Compile Include="Domain\Acao.cs" />
     <Compile Include="Domain\AcaoKey.cs" />
     <Compile Include="Domain\IKey.cs" />

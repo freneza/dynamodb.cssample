@@ -1,8 +1,7 @@
 ﻿using System;
 using dynamodb.sample.Domain;
-using dynamodb.sample.Repo;
 using dynamodb.sample.Business.Converter;
-using dynamodb.sample.Business.Filter;
+using dynamodb.sample.Business.Service;
 
 namespace dynamodb.sample
 {
@@ -54,24 +53,7 @@ namespace dynamodb.sample
             Console.WriteLine("Digite o valor de saída:");
             var saida = Double.Parse(Console.ReadLine());
 
-            var rarepo = new RecomendacaoAbertaRepo();
-            var recomendacao_aberta = rarepo.Get(new RecomendacaoAbertaKey { Carteira = carteira, Ticker = ticker });
-
-            var recomendacao_fechada = new RecomendacaoFechada
-            {
-                Carteira = carteira,
-                Ticker = ticker,
-                DataEntrada = recomendacao_aberta.Data,
-                DataFechamento = data_fechamento,
-                Entrada = recomendacao_aberta.Entrada,
-                Qtdd = recomendacao_aberta.Qtdd,
-                Saida = saida,
-                Resultado = Math.Round(((saida - recomendacao_aberta.Entrada) / recomendacao_aberta.Entrada) * 100, 2)
-            };
-
-            var rfrepo = new RecomendacaoFechadaRepo();
-            rfrepo.Add(recomendacao_fechada);
-            rarepo.Delete(recomendacao_aberta.Key);
+            new EncerrarRecomendacaoService().Execute(carteira, ticker, data_fechamento, saida);
 
             Console.WriteLine("Recomendação encerrada!");
         }
@@ -79,7 +61,7 @@ namespace dynamodb.sample
         {
             Console.WriteLine("Digite o setor:");
             var entrada = Console.ReadLine();
-            var lista = new AcaoRepo().Search(new AcaoSearchFilter { Setor = entrada });
+            var lista = new AcaoService().Search(entrada);
             foreach (var acao in lista)
             {
                 Print(acao);
@@ -89,13 +71,13 @@ namespace dynamodb.sample
         {
             Console.WriteLine("Digite o ticker:");
             var ticker = Console.ReadLine();
-            var acao = new AcaoRepo().Get(new AcaoKey { Ticker = ticker });
+            var acao = new AcaoService().Get(ticker);
             Print(acao);
         }
         private static void ListarAcoes()
         {
             Console.WriteLine("Não faz sentido listar tabela em NoSQL. Mas fica um exemplo do mesmo jeito.");
-            var lista = new AcaoRepo().List();
+            var lista = new AcaoService().List();
 
             foreach (var acao in lista)
             {
@@ -118,7 +100,7 @@ namespace dynamodb.sample
             Console.WriteLine("Digite: ticker empresa setor");
             var entrada = Console.ReadLine();
             var acao = AcaoConverter.ConvertToAcao(entrada);
-            new AcaoRepo().Add(acao);
+            new AcaoService().Add(acao);
         }
     }
 
