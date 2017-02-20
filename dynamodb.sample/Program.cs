@@ -7,13 +7,6 @@ using dynamodb.sample.Repo;
 using dynamodb.sample.Business.Converter;
 using dynamodb.sample.Business.Filter;
 
-// Add using statements to access AWS SDK for .NET services. 
-// Both the Service and its Model namespace need to be added 
-// in order to gain access to a service. For example, to access
-// the EC2 service, add:
-// using Amazon.EC2;
-// using Amazon.EC2.Model;
-
 namespace dynamodb.sample
 {
     class Program
@@ -64,37 +57,26 @@ namespace dynamodb.sample
             Console.WriteLine("Digite o valor de saída:");
             var saida = Double.Parse(Console.ReadLine());
 
-            AmazonDynamoDBClient client = new AmazonDynamoDBClient();
-            Table recomendacao_aberta_table = Table.LoadTable(client, "recomendacao_carteira");
-            var key = new Dictionary<string, DynamoDBEntry>();
-            key.Add("carteira", carteira);
-            key.Add("ticker", ticker);
-            Document recomendacao_aberta_doc = recomendacao_aberta_table.GetItem(key);
+            var rarepo = new RecomendacaoAbertaRepo();
+            var recomendacao_aberta = rarepo.Get(new RecomendacaoAbertaKey { Carteira = carteira, Ticker = ticker });
 
-            var entrada = recomendacao_aberta_doc["entrada"].AsDouble();
-            var resultado = Math.Round(((saida - entrada) / entrada) * 100, 2);
-            var qtdd = recomendacao_aberta_doc["Qtdd"].AsInt();
-            var data_entrada = recomendacao_aberta_doc["data"].AsInt();
+            var recomendacao_fechada = new RecomendacaoFechada
+            {
+                Carteira = carteira,
+                Ticker = ticker,
+                DataEntrada = recomendacao_aberta.Data,
+                DataFechamento = data_fechamento,
+                Entrada = recomendacao_aberta.Entrada,
+                Qtdd = recomendacao_aberta.Qtdd,
+                Saida = saida,
+                Resultado = Math.Round(((saida - recomendacao_aberta.Entrada) / recomendacao_aberta.Entrada) * 100, 2)
+            };
 
-            Table recomendacao_fechada_table = Table.LoadTable(client, "recomendacao_fechada");
-            Document closedItem = new Document();
-            closedItem.Add("ticker", ticker);
-            closedItem.Add("data_fechamento", data_fechamento);
-            closedItem.Add("carteira", carteira);
-            closedItem.Add("entrada", entrada);
-            closedItem.Add("saida", saida);
-            closedItem.Add("resultado", resultado);
-            closedItem.Add("qtdd", qtdd);
-            closedItem.Add("data_entrada", data_entrada);
-
-            recomendacao_fechada_table.PutItem(closedItem);
-
-            // risco de problema de incluir e não excluir...
-
-            recomendacao_aberta_table.DeleteItem(recomendacao_aberta_doc);
+            var rfrepo = new RecomendacaoFechadaRepo();
+            rfrepo.Add(recomendacao_fechada);
+            rarepo.Delete(recomendacao_aberta.Key);
 
             Console.WriteLine("Recomendação encerrada!");
-            //Print(closedItem.ToAttributeMap());
         }
         private static void BuscarAcoes()
         {

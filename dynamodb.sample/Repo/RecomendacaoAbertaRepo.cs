@@ -1,4 +1,5 @@
-﻿using dynamodb.sample.Domain;
+﻿using dynamodb.sample.Business.Converter;
+using dynamodb.sample.Domain;
 
 namespace dynamodb.sample.Repo
 {
@@ -6,6 +7,7 @@ namespace dynamodb.sample.Repo
     {
         public RecomendacaoAbertaRepo() : base("recomendacao_carteira")
         {
+            this.converter = new RecomendacaoAbertaConverter();
         }
     }
 }

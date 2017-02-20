@@ -45,6 +45,10 @@ namespace dynamodb.sample.Repo
         {
             return converter.ConvertToDomain(table.GetItem(chave.ToDictionary()));
         }
+        public void Delete(IKey chave)
+        {
+            table.DeleteItem(chave.ToDictionary());
+        }
         public IEnumerable<T> Search(ISearchFilter filters)
         {
             var response = client.Scan(filters.GetScanRequest());
